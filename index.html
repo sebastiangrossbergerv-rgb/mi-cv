@@ -30,7 +30,6 @@
     </div>
     <nav class="nav-links">
       <a href="#profile">Profile</a>
-      <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#professor">Professor</a>
       <a href="#salesforce-credentials">Salesforce</a>
@@ -109,14 +108,10 @@
               <span class="badge-soft">Playwright</span>
               <span class="badge-soft">Cypress</span>
               <span class="badge-soft">Selenium</span>
+              <span class="badge-soft">Salesforce</span>
               <span class="badge-soft">Postman</span>
-              <span class="badge-soft">SoapUI</span>
-              <span class="badge-soft">Reflect</span>
-              <span class="badge-soft">Zephyr Scale</span>
-              <span class="badge-soft">TestRail</span>
               <span class="badge-soft">Jira</span>
-              <span class="badge-soft">Jmeter</span>
-              <span class="badge-soft">LoadRunner</span>
+              <span class="badge-soft">GitHub Actions</span>
             </div>
           </div>
         </aside>
@@ -143,9 +138,8 @@
           <div class="stat-label">Testing Efficiency Increase</div>
         </div>
       </div>
-      <p class="section-sub" style="text-align:center; margin-top:0.8rem;">
-        Metrics based on projects at The Lifetime Value Company, Nitel and Universidad Fidélitas
-        (automation coverage, training impact and efficiency gains).
+      <p class="section-sub" style="text-align:center; margin-top:0.8rem; font-style: italic; opacity: 0.7;">
+        * Source: Annual performance reviews and project closure reports (2020-2025).
       </p>
     </section>
 
@@ -244,12 +238,14 @@
         <aside class="sidebar-card">
           <h3>Education</h3>
           <p><strong>Bachelor of IT Management</strong></p>
+          <p class="section-sub">Universidad Fidélitas (2018 - 2022)</p>
           <p class="section-sub">Focused on IT management, business processes, and technology foundations.</p>
 
           <h3>Certifications</h3>
           <ul>
-            <li>Scrum Foundation Professional Certification - SFPC™ (2024)</li>
-            <li>Cybersecurity Awareness - CAPC (2024)</li>
+            <li>Scrum Foundation Professional Certification (SFPC™) <br><small style="color:var(--muted)">Certiprof ·
+                2024</small></li>
+            <li>Cybersecurity Awareness (CAPC) <br><small style="color:var(--muted)">Certiprof · 2024</small></li>
           </ul>
 
           <h3 style="margin-top:0.8rem;">Ways of working</h3>
@@ -422,7 +418,7 @@
         </div>
 
         <div class="trailhead-cta">
-          <a href="https://trailblazer.me/id/sgrossberger" target="_blank" class="btn-trailhead">
+          <a href="https://www.salesforce.com/trailblazer/xeoohoo1waww0jfmvo" target="_blank" class="btn-trailhead">
             View Full Trailblazer Profile →
           </a>
         </div>
@@ -437,97 +433,64 @@
       </p>
 
       <div class="projects-grid">
-        <!-- Project 1 -->
+        <!-- Project 1: TLV (Combined) -->
         <article class="project-card">
           <div class="project-badge">The Lifetime Value Company</div>
-          <h3>Automation Framework Migration</h3>
+          <h3>QA Lead Initiatives (Automation & CI/CD)</h3>
           <p class="project-meta">
-            <strong>Context:</strong> High-traffic web platform with frequent releases.<br>
-            <strong>Role:</strong> Lead QA for automation strategy and framework migration.<br>
-            <strong>Result:</strong> 80% regression automation and 30% faster test execution.
-          </p>
-          <p class="project-desc">
-            Led the migration from Selenium to Playwright and Cypress, increasing test
-            execution speed by 40% and reducing flakiness by 60%.
+            <strong>Context:</strong> High-traffic web platform services shipping via CI/CD.<br>
+            <strong>Role:</strong> QA Lead & Framework Owner.<br>
+            <strong>Impact:</strong> 40% faster execution & 50% fewer deployment bugs.
           </p>
 
-          <div class="project-section">
+          <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+            <h4 style="font-size: 1rem; color: var(--text); margin-bottom:0.5rem;">Init 1: Automation Framework
+              Migration</h4>
+            <p class="project-desc" style="margin-bottom: 0.5rem; font-size: 0.9rem;">
+              Migrated legacy Selenium suite to <strong>Playwright/Cypress</strong>, enabling parallel execution on 5
+              browsers.
+            </p>
+            <ul class="achievements-list" style="margin-bottom: 1rem;">
+              <li>🚀 80% regression coverage achieved</li>
+              <li>🚀 Execution time cut from 45m to 27m</li>
+            </ul>
+          </div>
+
+          <div style="margin-top: 1rem; border-top: 1px dashed var(--border); padding-top: 1rem;">
+            <h4 style="font-size: 1rem; color: var(--text); margin-bottom:0.5rem;">Init 2: CI/CD Pipeline Integration
+            </h4>
+            <p class="project-desc" style="margin-bottom: 0.5rem; font-size: 0.9rem;">
+              Embedded automated quality gates into Jenkins/GitHub Actions pipelines for every PR.
+            </p>
+            <ul class="achievements-list">
+              <li>🚀 Zero critical bugs in production for 6 months</li>
+              <li>🚀 Automatic rollback implemented on failure</li>
+            </ul>
+          </div>
+
+          <div class="project-section" style="margin-top: 1.5rem;">
             <div class="project-label">TECHNOLOGIES</div>
             <div class="tech-tags">
               <span>Playwright</span>
               <span>Cypress</span>
-              <span>TypeScript</span>
-              <span>GitHub Actions</span>
-            </div>
-          </div>
-
-          <div class="project-section">
-            <div class="project-label">KEY ACHIEVEMENTS</div>
-            <ul class="achievements-list">
-              <li>🚀 Achieved 80% automation coverage of regression test cases</li>
-              <li>🚀 Reduced test execution time from 45 minutes to 27 minutes</li>
-              <li>🚀 Implemented parallel test execution across 5 browsers</li>
-            </ul>
-          </div>
-
-          <div class="project-impact">
-            <span class="impact-icon">💡</span>
-            <span class="impact-text">Impact: Improved testing efficiency by 30%</span>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project-card">
-          <div class="project-badge">The Lifetime Value Company</div>
-          <h3>CI/CD Pipeline Integration</h3>
-          <p class="project-meta">
-            <strong>Context:</strong> Multiple services shipping via CI/CD to production.<br>
-            <strong>Role:</strong> QA Engineer integrating automated suites into pipelines.<br>
-            <strong>Result:</strong> 50% fewer deployment bugs and faster feedback on every PR.
-          </p>
-          <p class="project-desc">
-            Integrated automated test suites into CI/CD pipelines using Jenkins and
-            GitHub Actions, enabling continuous testing and faster feedback loops.
-          </p>
-
-          <div class="project-section">
-            <div class="project-label">TECHNOLOGIES</div>
-            <div class="tech-tags">
               <span>Jenkins</span>
               <span>GitHub Actions</span>
               <span>Docker</span>
-              <span>Cypress</span>
-              <span>Playwright</span>
             </div>
-          </div>
-
-          <div class="project-section">
-            <div class="project-label">KEY ACHIEVEMENTS</div>
-            <ul class="achievements-list">
-              <li>🚀 Automated test execution on every pull request</li>
-              <li>🚀 Reduced deployment bugs by 50%</li>
-              <li>🚀 Implemented automatic rollback on test failures</li>
-            </ul>
-          </div>
-
-          <div class="project-impact">
-            <span class="impact-icon">💡</span>
-            <span class="impact-text">Impact: Zero critical bugs in production for 6 months</span>
           </div>
         </article>
 
-        <!-- Project 3 -->
+        <!-- Project 2 (Nitel) -->
         <article class="project-card">
           <div class="project-badge">Nitel</div>
           <h3>Salesforce Testing Suite</h3>
           <p class="project-meta">
-            <strong>Context:</strong> Salesforce as a core system integrated with external services.<br>
-            <strong>Role:</strong> QA Engineer designing test strategy and automation for Salesforce flows.<br>
-            <strong>Result:</strong> 99.9% data accuracy and 65% reduction in manual regression effort.
+            <strong>Context:</strong> Salesforce core system integrated with external services.<br>
+            <strong>Role:</strong> QA Engineer (Salesforce & Intergations).<br>
+            <strong>Result:</strong> 99.9% data accuracy across systems.
           </p>
           <p class="project-desc">
-            Designed and executed comprehensive test strategy for Salesforce integrations,
-            ensuring seamless cross-system behavior and data integrity.
+            Designed comprehensive test strategy for Salesforce integrations, ensuring seamless cross-system behavior.
           </p>
 
           <div class="project-section">
@@ -543,30 +506,23 @@
           <div class="project-section">
             <div class="project-label">KEY ACHIEVEMENTS</div>
             <ul class="achievements-list">
-              <li>🚀 Created 150+ automated test cases for Salesforce workflows</li>
-              <li>🚀 Validated complex integrations with external systems</li>
+              <li>🚀 150+ automated test cases for Salesforce workflows</li>
               <li>🚀 Reduced manual testing effort by 65%</li>
             </ul>
           </div>
-
-          <div class="project-impact">
-            <span class="impact-icon">💡</span>
-            <span class="impact-text">Impact: Ensured 99.9% data accuracy across systems</span>
-          </div>
         </article>
 
-        <!-- Project 4 -->
+        <!-- Project 3 (University) -->
         <article class="project-card">
           <div class="project-badge">Universidad Fidélitas</div>
           <h3>QA Mentorship Program</h3>
           <p class="project-meta">
-            <strong>Context:</strong> Undergraduate students preparing for QA industry roles.<br>
-            <strong>Role:</strong> Professor and mentor designing curriculum and workshops.<br>
-            <strong>Result:</strong> 90% placement rate in QA roles for participating students.
+            <strong>Context:</strong> Undergraduate curriculum design.<br>
+            <strong>Role:</strong> Professor & Mentor.<br>
+            <strong>Result:</strong> 100+ students trained.
           </p>
           <p class="project-desc">
-            Designed and delivered comprehensive QA curriculum for undergraduate
-            students, including hands-on automation workshops and real-world projects.
+            Delivered hands-on automation workshops and real-world QA training.
           </p>
 
           <div class="project-section">
@@ -574,7 +530,6 @@
             <div class="tech-tags">
               <span>Selenium</span>
               <span>Python</span>
-              <span>Test Methodologies</span>
               <span>SDLC</span>
             </div>
           </div>
@@ -582,21 +537,14 @@
           <div class="project-section">
             <div class="project-label">KEY ACHIEVEMENTS</div>
             <ul class="achievements-list">
-              <li>🚀 Trained 100+ students in QA fundamentals</li>
               <li>🚀 Developed practical automation workshops</li>
-              <li>🚀 Mentored 2 QA engineers into leadership roles</li>
+              <li>🚀 90% placement rate for participating students</li>
             </ul>
-          </div>
-
-          <div class="project-impact">
-            <span class="impact-icon">💡</span>
-            <span class="impact-text">Impact: Students achieved 90% placement rate in QA roles</span>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills">
       <div class="skills-container">
         <h2>Skills in Software Quality</h2>
@@ -607,55 +555,55 @@
         <div class="skill-category highlight">
           <h3>☁️ Salesforce & Enterprise Testing <span class="badge new">FEATURED</span></h3>
           <div class="skills-grid">
-            <div class="skill-tag expert">Salesforce Platform</div>
-            <div class="skill-tag expert">Integration Testing</div>
-            <div class="skill-tag expert">Workflow Validation</div>
-            <div class="skill-tag expert">Data Integrity Testing</div>
+            <div class="skill-tag expert">Salesforce Platform<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Functional & Config</small></div>
+            <div class="skill-tag expert">Integration Testing<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">REST/SOAP & Middleware</small></div>
+            <div class="skill-tag expert">Workflow Validation<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Flows & Process Builder</small></div>
+            <div class="skill-tag expert">Data Integrity<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Import/Export Val.</small></div>
             <div class="skill-tag learning">Provar Automation <span class="badge learning">Learning</span></div>
-            <div class="skill-tag expert">REST API Testing</div>
-            <div class="skill-tag expert">Lightning Components</div>
-            <div class="skill-tag expert">End-to-End Testing</div>
-            <div class="skill-tag expert">Marketing Cloud</div>
+            <div class="skill-tag expert">REST API Testing<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Postman Collections</small></div>
+            <div class="skill-tag expert">Lightning Components<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">UI Testing</small></div>
+            <div class="skill-tag expert">Marketing Cloud<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Journey Builder</small></div>
           </div>
-        </div>
-
-        <!-- Core Testing & Methodologies -->
-        <div class="skill-category">
-          <h3>🎯 Core Testing & Methodologies</h3>
-          <p style="color: var(--muted); margin-bottom: 15px; font-size: 0.9rem;">Daily use in production environments
-          </p>
-          <ul class="skill-list">
-            <li>Manual & Exploratory Testing</li>
-            <li>Automated Testing</li>
-            <li>Regression Testing</li>
-            <li>Smoke Testing</li>
-            <li>Functional Testing</li>
-            <li>Black Box Testing</li>
-            <li>Accessibility Testing</li>
-            <li>Performance Testing</li>
-            <li>UAT Coordination</li>
-            <li>Risk-Based Testing</li>
-            <li>Shift-Left Testing</li>
-            <li>Agile / Scrum / Waterfall</li>
-          </ul>
         </div>
 
         <!-- Automation Tools & Frameworks -->
         <div class="skill-category">
           <h3>🤖 Automation Tools & Frameworks</h3>
           <div class="skills-grid">
-            <div class="skill-tag expert">Playwright</div>
-            <div class="skill-tag expert">Cypress</div>
-            <div class="skill-tag expert">Selenium WebDriver</div>
-            <div class="skill-tag expert">Postman</div>
-            <div class="skill-tag expert">REST API Testing</div>
-            <div class="skill-tag">SoapUI</div>
-            <div class="skill-tag expert">Reflect</div>
-            <div class="skill-tag">TestRail</div>
-            <div class="skill-tag expert">Zephyr Scale</div>
-            <div class="skill-tag expert">Jira</div>
-            <div class="skill-tag">JMeter</div>
-            <div class="skill-tag">LoadRunner</div>
+            <div class="skill-tag expert">Playwright<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Framework Owner</small></div>
+            <div class="skill-tag expert">Cypress<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Daily Use / Maintenance</small></div>
+            <div class="skill-tag expert">Selenium WebDriver<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Legacy Migration Lead</small></div>
+            <div class="skill-tag expert">Postman<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Automated Checks</small></div>
+            <div class="skill-tag expert">Reflect<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Low-Code Implementation</small></div>
+            <div class="skill-tag">JMeter<br><small style="color:var(--muted); font-size:0.75em; font-weight:400;">Basic
+                Load Checks</small></div>
+          </div>
+        </div>
+
+        <!-- CI/CD & DevOps -->
+        <div class="skill-category">
+          <h3>🔄 CI/CD & DevOps</h3>
+          <div class="skills-grid">
+            <div class="skill-tag expert">Jenkins<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Pipeline Config</small></div>
+            <div class="skill-tag expert">GitHub Actions<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Workflow Authoring</small></div>
+            <div class="skill-tag expert">Quality Gates<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Blocking Rules</small></div>
+            <div class="skill-tag expert">Test Auto in CI/CD<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Reporting & Triage</small></div>
           </div>
         </div>
 
@@ -663,15 +611,27 @@
         <div class="skill-category">
           <h3>💻 Programming & Scripting</h3>
           <div class="skills-grid">
-            <div class="skill-tag expert">Python</div>
-            <div class="skill-tag expert">JavaScript</div>
-            <div class="skill-tag expert">TypeScript</div>
-            <div class="skill-tag expert">SQL</div>
-            <div class="skill-tag">Java</div>
-            <div class="skill-tag">C#</div>
-            <div class="skill-tag learning">AMPscript <span class="badge new">NEW</span></div>
+            <div class="skill-tag expert">Python<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Scripting/Teaching</small></div>
+            <div class="skill-tag expert">TypeScript<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Primary Auto Lang</small></div>
+            <div class="skill-tag expert">SQL<br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Data Validation</small></div>
             <div class="skill-tag learning">Apex <span class="badge learning">Learning</span></div>
           </div>
+        </div>
+
+        <!-- Core Testing & Methodologies -->
+        <div class="skill-category">
+          <h3>🎯 Core Testing & Methodologies</h3>
+          <ul class="skill-list">
+            <li>Test Strategy Design (Risk-based approach)</li>
+            <li>Exploratory Testing (Finding edge cases)</li>
+            <li>Regression Management (Suite optimization)</li>
+            <li>Shift-Left Testing (Early involvement)</li>
+            <li>Defect Triage (Severity vs Priority)</li>
+            <li>Agile/Scrum Ceremonies</li>
+          </ul>
         </div>
 
         <!-- Leadership & Soft Skills -->
@@ -682,49 +642,18 @@
             <li>Team Leadership (Led 2 QA teams)</li>
             <li>Code Review & Quality Advocacy</li>
             <li>Stakeholder Communication</li>
-            <li>Cross-functional Collaboration</li>
-            <li>Agile Leadership</li>
-            <li>Risk Management</li>
-            <li>Critical Thinking</li>
-            <li>Clear Documentation</li>
             <li>Teaching & Training</li>
           </ul>
-        </div>
-
-        <!-- Specialized Testing Areas -->
-        <div class="skill-category">
-          <h3>🔬 Specialized Testing Areas</h3>
-          <ul class="skill-list">
-            <li>Salesforce Workflow Testing <span class="badge new">NEW</span></li>
-            <li>Integration & API Testing</li>
-            <li>Performance & Load Testing</li>
-            <li>Security & Vulnerability Testing</li>
-            <li>Accessibility (WCAG) Testing</li>
-            <li>Data Migration Testing</li>
-            <li>Responsive & Cross-browser Testing</li>
-            <li>Mobile Testing</li>
-          </ul>
-        </div>
-
-        <!-- CI/CD & DevOps -->
-        <div class="skill-category">
-          <h3>🔄 CI/CD & DevOps</h3>
-          <div class="skills-grid">
-            <div class="skill-tag expert">Jenkins</div>
-            <div class="skill-tag expert">GitHub Actions</div>
-            <div class="skill-tag expert">Pipeline Monitoring</div>
-            <div class="skill-tag expert">Quality Gates</div>
-            <div class="skill-tag">Docker</div>
-            <div class="skill-tag expert">Test Automation in CI/CD</div>
-          </div>
         </div>
 
         <!-- Languages -->
         <div class="skill-category">
           <h3>🌍 Languages</h3>
           <div class="skills-grid">
-            <div class="skill-tag expert">Spanish (Native)</div>
-            <div class="skill-tag expert">English (Advanced/Fluent)</div>
+            <div class="skill-tag expert">Spanish <br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">Native</small></div>
+            <div class="skill-tag expert">English <br><small
+                style="color:var(--muted); font-size:0.75em; font-weight:400;">B2+/C1 Advanced</small></div>
           </div>
         </div>
 
@@ -737,7 +666,6 @@
               <ul>
                 <li>Provar for Salesforce automation</li>
                 <li>Advanced Apex testing</li>
-                <li>UiPath RPA fundamentals</li>
                 <li>AI-assisted testing strategies</li>
               </ul>
             </div>
@@ -745,7 +673,6 @@
               <h4>Next Goals</h4>
               <ul>
                 <li>Salesforce Platform Developer I cert</li>
-                <li>50+ Trailhead badges</li>
                 <li>Advanced CI/CD patterns</li>
                 <li>Test architecture design</li>
               </ul>
@@ -817,19 +744,15 @@
             </div>
           </div>
           <div>
-            <div class="contact-item-label">Phone</div>
-            <div class="contact-item-value">+506 6071 7675</div>
-          </div>
-          <div>
-            <div class="contact-item-label">Location</div>
-            <div class="contact-item-value">Cartago, Costa Rica</div>
-          </div>
-          <div>
             <div class="contact-item-label">LinkedIn</div>
             <div class="contact-item-value">
               <a href="https://www.linkedin.com/in/sebastian-grossberger" target="_blank"
                 rel="noopener">linkedin.com/in/sebastian-grossberger</a>
             </div>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value" style="font-size: 0.9em; opacity: 0.7;">Included in full CV</div>
           </div>
         </div>
       </div>
@@ -861,6 +784,11 @@
           <p class="template-meta">
             Focused on clarity, reproducibility and business impact for the development team.
           </p>
+          <div class="alert-box"
+            style="background: rgba(56,189,248,0.1); border-left: 3px solid var(--accent-2); padding: 0.8rem; margin-bottom: 1rem; font-size: 0.85rem; border-radius: 4px;">
+            <strong>💡 Tip:</strong> Severity = Technical Impact (Critical, Major). Priority = Business Urgency (High,
+            Medium).
+          </div>
           <div class="template-actions">
             <button class="btn btn-outline btn-copy" type="button">
               Copy bug report
@@ -876,7 +804,7 @@ Priority: (High / Medium / Low)
 Severity: (Critical / Major / Minor / Trivial)
 Status: (New / In progress / Resolved / Closed)
 
-Reported by: Sebastian Grossberger
+Reported by: [QA Engineer Name]
 Date:
 Version / Build:
 Module / Feature:
@@ -934,7 +862,7 @@ Additional notes:
 
 Project:
 Version / Release:
-QA Owner: Sebastian Grossberger
+QA Owner: [QA Lead Name]
 Date:
 
 1. Objective
