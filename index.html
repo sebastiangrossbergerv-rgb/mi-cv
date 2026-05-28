@@ -515,9 +515,27 @@ footer {
 /* REVEAL */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
+
+/* STAGGER DELAYS */
+[data-delay="1"].reveal { transition-delay: 0.1s; }
+[data-delay="2"].reveal { transition-delay: 0.2s; }
+[data-delay="3"].reveal { transition-delay: 0.3s; }
+[data-delay="4"].reveal { transition-delay: 0.4s; }
+
+/* SCROLL PROGRESS BAR */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(to right, var(--accent), #38bdf8);
+  z-index: 200; pointer-events: none;
+  transition: width 0.08s linear;
+}
+
+/* COUNTER NUMBERS */
+[data-counter] { display: inline-block; }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- =============== HEADER =============== -->
 <header class="site-header">
@@ -573,10 +591,10 @@ footer {
       <a href="#contact" class="btn btn-ghost">Open to opportunities <span class="arrow">→</span></a>
     </div>
     <div class="metrics-bar">
-      <div><div class="metric-num">6<span class="unit">+</span></div><div class="metric-label">Years in<br>QA Engineering</div></div>
-      <div><div class="metric-num">80<span class="unit">%</span></div><div class="metric-label">Regression coverage<br>on critical flows</div></div>
-      <div><div class="metric-num">150<span class="unit">+</span></div><div class="metric-label">Automated test cases<br>authored & maintained</div></div>
-      <div><div class="metric-num">0</div><div class="metric-label">Critical incidents<br>across 6-month period</div></div>
+      <div><div class="metric-num"><span data-counter data-target="6">6</span><span class="unit">+</span></div><div class="metric-label">Years in<br>QA Engineering</div></div>
+      <div><div class="metric-num"><span data-counter data-target="80">80</span><span class="unit">%</span></div><div class="metric-label">Regression coverage<br>on critical flows</div></div>
+      <div><div class="metric-num"><span data-counter data-target="150">150</span><span class="unit">+</span></div><div class="metric-label">Automated test cases<br>authored & maintained</div></div>
+      <div><div class="metric-num"><span data-counter data-target="400">400</span><span class="unit">+</span></div><div class="metric-label">Students<br>mentored</div></div>
     </div>
   </div>
 </section>
@@ -930,50 +948,88 @@ footer {
 </footer>
 
 <script>
-// Theme toggle
+// ===== THEME TOGGLE =====
 const themeToggle = document.getElementById('themeToggle');
 themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', next === 'dark' ? '#0A0B0E' : '#FAFAF7');
 });
 
-// Reveal on scroll
-const observer = new IntersectionObserver((entries) => {
+// ===== SCROLL PROGRESS BAR =====
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  if (progressBar) progressBar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+}, { passive: true });
+
+// ===== ANIMATED COUNTERS =====
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const duration = 1800;
+  const t0 = performance.now();
+  function tick(now) {
+    const p = Math.min((now - t0) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.6 });
+
+document.querySelectorAll('[data-counter]').forEach(el => {
+  el.textContent = '0';
+  counterObs.observe(el);
+});
+
+// ===== STAGGER DELAYS within grids =====
+document.querySelectorAll('.projects-grid, .skills-grid, .experience-list').forEach(grid => {
+  grid.querySelectorAll('.project-card, .skill-group, .exp-item').forEach((child, i) => {
+    if (i > 0) child.dataset.delay = Math.min(i, 4);
+  });
+});
+
+// ===== REVEAL ON SCROLL =====
+const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('in');
-      observer.unobserve(entry.target);
+      revealObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal, .exp-item, .approach-block, .skill-group, .feature-block, .project-card').forEach(el => {
+document.querySelectorAll('.exp-item, .approach-block, .skill-group, .feature-block, .project-card, .section-head, .teaching-grid > div, .outcomes-list li').forEach(el => {
   el.classList.add('reveal');
-  observer.observe(el);
+  revealObs.observe(el);
 });
 
-// Active section detection in nav
+// ===== ACTIVE SECTION IN NAV =====
 const navLinks = document.querySelectorAll('#navLinks a');
 const sections = ['hero', 'production', 'experience', 'projects', 'skills', 'teaching', 'contact']
-  .map(id => document.getElementById(id))
-  .filter(Boolean);
+  .map(id => document.getElementById(id)).filter(Boolean);
 
-const sectionObserver = new IntersectionObserver((entries) => {
+const sectionObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const id = entry.target.id;
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.dataset.section === id);
-      });
+      navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === id));
     }
   });
 }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
 
-sections.forEach(sec => sectionObserver.observe(sec));
+sections.forEach(sec => sectionObs.observe(sec));
 </script>
 </body>
 </html>
