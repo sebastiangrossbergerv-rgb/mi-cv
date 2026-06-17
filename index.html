@@ -64,24 +64,60 @@
 
 <style>
 /* ============ DESIGN TOKENS ============ */
+/* Theme-independent tokens: type, spacing, geometry, motion. */
 :root{
-  --bg:           #0A0E14;   /* deep slate-black */
-  --bg-soft:      #11161F;   /* raised surface */
-  --bg-card:      #131A24;   /* cards */
-  --ink:          #E8ECF1;   /* primary text */
-  --ink-dim:      #9BA7B4;   /* secondary text */
-  --ink-faint:    #5A6675;   /* tertiary / labels */
-  --line:         #1F2730;   /* hairlines */
-  --line-soft:    #19212B;
-  --accent:       #4ADE9B;   /* signal green — pass state */
-  --accent-warm:  #F5A623;   /* amber — investigating */
-  --accent-blue:  #5B9DF9;   /* link / info */
   --radius:       14px;
   --radius-sm:    8px;
   --maxw:         1080px;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body:    'Inter', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
+  --ease:         cubic-bezier(.2,.7,.2,1);
+  --theme-fade:   background-color .4s ease, color .4s ease, border-color .4s ease;
+  color-scheme: dark;
+}
+
+/* DARK — the "night terminal". Default theme. */
+:root,
+[data-theme="dark"]{
+  --bg:          #0A0E14;   /* deep slate-black */
+  --bg-soft:     #11161F;   /* raised surface */
+  --bg-card:     #131A24;   /* cards */
+  --ink:         #E8ECF1;   /* primary text */
+  --ink-dim:     #9BA7B4;   /* secondary text */
+  --ink-faint:   #5A6675;   /* tertiary / labels */
+  --line:        #1F2730;   /* hairlines */
+  --line-soft:   #19212B;
+  --accent:      #4ADE9B;   /* signal green — pass */
+  --accent-ink:  #0A0E14;   /* text on accent */
+  --accent-warm: #F5A623;   /* amber — investigating */
+  --accent-soft: rgba(74,222,155,.10);  /* hero glow / wash */
+  --shadow-lg:   0 30px 70px -30px rgba(0,0,0,.7);
+  --shadow-card: 0 10px 30px -8px rgba(74,222,155,.5);
+  --term-shadow: 0 30px 70px -30px rgba(0,0,0,.7);
+  --nav-bg:      rgba(10,14,20,.82);
+  color-scheme: dark;
+}
+
+/* LIGHT — the "printed test report". Warm paper, forest-green ink, not a flat invert. */
+[data-theme="light"]{
+  --bg:          #F6F4EE;   /* warm paper */
+  --bg-soft:     #FBFAF6;   /* raised surface */
+  --bg-card:     #FFFFFF;   /* cards */
+  --ink:         #1A2129;   /* near-black ink */
+  --ink-dim:     #54616E;   /* secondary */
+  --ink-faint:   #8A95A1;   /* tertiary / labels */
+  --line:        #E2DED3;   /* hairlines */
+  --line-soft:   #ECE8DE;
+  --accent:      #0F9D63;   /* forest green — AA on paper */
+  --accent-ink:  #FFFFFF;   /* text on accent */
+  --accent-warm: #C77A12;   /* amber, darkened for contrast */
+  --accent-soft: rgba(15,157,99,.08);
+  --shadow-lg:   0 24px 60px -28px rgba(40,50,45,.28);
+  --shadow-card: 0 14px 34px -12px rgba(15,157,99,.35);
+  --term-shadow: 0 24px 55px -26px rgba(40,50,45,.32);
+  --nav-bg:      rgba(246,244,238,.82);
+  color-scheme: light;
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
@@ -94,8 +130,16 @@ body{
   font-size:16px;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  transition:var(--theme-fade);
 }
-::selection{ background:var(--accent); color:var(--bg); }
+::selection{ background:var(--accent); color:var(--accent-ink); }
+
+/* Visible keyboard focus everywhere — accessibility floor. */
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:3px; }
+
+/* Smooth fade when switching themes, applied to every surface. */
+.nav, .stat, .pillar, .proj, .skill-cat, .terminal, .term-bar, .chip,
+.btn, .lang-toggle, .theme-toggle, .skill-cat .row, .contact .avail{ transition:var(--theme-fade); }
 
 a{ color:inherit; text-decoration:none; }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
@@ -103,7 +147,7 @@ a{ color:inherit; text-decoration:none; }
 /* ============ NAV ============ */
 .nav{
   position:sticky; top:0; z-index:100;
-  background:rgba(10,14,20,.82);
+  background:var(--nav-bg);
   backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
 }
@@ -125,23 +169,39 @@ a{ color:inherit; text-decoration:none; }
   background:none; border:none; color:var(--ink-faint); cursor:pointer;
   padding:5px 11px; font-family:inherit; font-size:inherit; transition:all .2s;
 }
-.lang-toggle button.on{ background:var(--accent); color:var(--bg); font-weight:700; }
-.nav-burger{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; }
-.nav-burger span{ width:22px; height:2px; background:var(--ink); display:block; }
+.lang-toggle button.on{ background:var(--accent); color:var(--accent-ink); font-weight:700; }
+.nav-tools{ display:flex; align-items:center; gap:12px; }
+.theme-toggle{
+  width:34px; height:34px; flex:none; display:grid; place-items:center;
+  background:none; border:1px solid var(--line); border-radius:50%; cursor:pointer;
+  color:var(--ink-dim); transition:all .2s var(--ease);
+}
+.theme-toggle:hover{ border-color:var(--accent); color:var(--accent); transform:rotate(-12deg); }
+.theme-toggle svg{ width:17px; height:17px; }
+.theme-toggle .moon{ display:none; }
+[data-theme="light"] .theme-toggle .sun{ display:none; }
+[data-theme="light"] .theme-toggle .moon{ display:block; }
+.nav-right{ display:flex; align-items:center; gap:12px; }
+.nav-burger{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:6px; }
+.nav-burger span{ width:22px; height:2px; background:var(--ink); display:block; transition:var(--theme-fade); }
 
 /* ============ HERO ============ */
 .hero{ padding:84px 0 64px; position:relative; }
 .hero::before{
   content:''; position:absolute; top:-10%; left:50%; transform:translateX(-50%);
   width:760px; height:520px; pointer-events:none;
-  background:radial-gradient(ellipse at center, rgba(74,222,155,.10), transparent 65%);
+  background:radial-gradient(ellipse at center, var(--accent-soft), transparent 65%);
   filter:blur(20px);
+}
+.hero-name{
+  font-family:var(--font-display); font-weight:600; letter-spacing:-.01em;
+  font-size:clamp(1.05rem,2.4vw,1.35rem); color:var(--ink); margin-bottom:10px;
 }
 .eyebrow{
   font-family:var(--font-mono); font-size:12.5px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:10px;
 }
-.eyebrow::before{ content:''; width:26px; height:1px; background:var(--accent); }
+.eyebrow::before{ content:''; width:26px; height:1px; background:var(--accent); flex:none; }
 .hero h1{
   font-family:var(--font-display); font-weight:700; letter-spacing:-.025em;
   font-size:clamp(2.4rem, 6vw, 4.1rem); line-height:1.02; margin-bottom:24px; max-width:15ch;
@@ -155,15 +215,15 @@ a{ color:inherit; text-decoration:none; }
   padding:13px 22px; border-radius:var(--radius-sm); transition:all .22s; cursor:pointer; border:1px solid transparent;
   display:inline-flex; align-items:center; gap:9px;
 }
-.btn-primary{ background:var(--accent); color:var(--bg); font-weight:700; }
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -8px rgba(74,222,155,.5); }
+.btn-primary{ background:var(--accent); color:var(--accent-ink); font-weight:700; }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:var(--shadow-card); }
 .btn-ghost{ border-color:var(--line); color:var(--ink-dim); }
 .btn-ghost:hover{ border-color:var(--accent); color:var(--ink); }
 
 /* ============ TERMINAL CARD (signature) ============ */
 .terminal{
   margin-top:54px; background:var(--bg-soft); border:1px solid var(--line);
-  border-radius:var(--radius); overflow:hidden; box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
+  border-radius:var(--radius); overflow:hidden; box-shadow:var(--term-shadow);
 }
 .term-bar{ display:flex; align-items:center; gap:8px; padding:13px 16px; border-bottom:1px solid var(--line); background:var(--bg-card); }
 .term-bar .tdot{ width:11px; height:11px; border-radius:50%; }
@@ -270,13 +330,35 @@ body.es [data-es]{ display:revert !important; }
   .xp-item{ grid-template-columns:1fr; gap:14px; }
   .nav-links{ display:none; }
   .nav-burger{ display:flex; }
-  .nav-links.open{ display:flex; position:absolute; top:100%; right:0; left:0; flex-direction:column; background:var(--bg-soft); border-bottom:1px solid var(--line); padding:18px 28px; gap:16px; }
+  .nav-links.open{
+    display:flex; position:absolute; top:100%; right:0; left:0; flex-direction:column;
+    background:var(--bg-soft); border-bottom:1px solid var(--line); padding:20px 28px 26px; gap:4px;
+    box-shadow:var(--shadow-lg);
+  }
+  .nav-links.open a{ padding:11px 0; border-bottom:1px solid var(--line-soft); font-size:1rem; }
+  .nav-links.open a:last-of-type{ border-bottom:none; }
+}
+@media (max-width:480px){
+  .stats{ grid-template-columns:1fr; }
+  .hero{ padding:60px 0 48px; }
+  .hero-cta{ flex-direction:column; align-items:stretch; }
+  .hero-cta .btn{ justify-content:center; }
 }
 @media (prefers-reduced-motion:reduce){
   *{ animation:none !important; transition:none !important; }
   .reveal{ opacity:1; transform:none; }
 }
 </style>
+<script>
+/* Set theme before first paint to avoid a flash of the wrong theme. */
+(function(){
+  try{
+    var t = localStorage.getItem('theme');
+    if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){ document.documentElement.setAttribute('data-theme','dark'); }
+})();
+</script>
 </head>
 <body>
 
@@ -290,14 +372,22 @@ body.es [data-es]{ display:revert !important; }
       <a href="#projects" data-en>Automation</a><a href="#projects" data-es>Automatización</a>
       <a href="#skills" data-en>Skills</a><a href="#skills" data-es>Skills</a>
       <a href="#contact" data-en>Contact</a><a href="#contact" data-es>Contacto</a>
-      <div class="lang-toggle">
-        <button id="btn-en" class="on" onclick="setLang('en')">EN</button>
-        <button id="btn-es" onclick="setLang('es')">ES</button>
-      </div>
     </div>
-    <button class="nav-burger" onclick="document.getElementById('navlinks').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+      <div class="nav-tools">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button id="btn-en" class="on" onclick="setLang('en')" aria-pressed="true">EN</button>
+          <button id="btn-es" onclick="setLang('es')" aria-pressed="false">ES</button>
+        </div>
+        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle dark and light theme" title="Toggle theme">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+        </button>
+      </div>
+      <button class="nav-burger" onclick="document.getElementById('navlinks').classList.toggle('open')" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -306,6 +396,7 @@ body.es [data-es]{ display:revert !important; }
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="wrap">
+    <p class="hero-name">Sebastian Grossberger Villarroel</p>
     <div class="eyebrow" data-en>Senior Software Development Engineer in Test</div>
     <div class="eyebrow" data-es>Senior Software Development Engineer in Test</div>
 
@@ -654,11 +745,30 @@ body.es [data-es]{ display:revert !important; }
 function setLang(l){
   document.body.classList.toggle('es', l==='es');
   document.documentElement.lang = l;
-  document.getElementById('btn-en').classList.toggle('on', l==='en');
-  document.getElementById('btn-es').classList.toggle('on', l==='es');
+  var en = document.getElementById('btn-en'), es = document.getElementById('btn-es');
+  en.classList.toggle('on', l==='en'); en.setAttribute('aria-pressed', l==='en');
+  es.classList.toggle('on', l==='es'); es.setAttribute('aria-pressed', l==='es');
   try{ localStorage.setItem('lang', l); }catch(e){}
 }
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content', t==='light' ? '#F6F4EE' : '#0A0E14');
+  try{ localStorage.setItem('theme', t); }catch(e){}
+}
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(cur==='dark' ? 'light' : 'dark');
+}
 (function(){
+  // Theme: saved choice wins; otherwise follow the OS preference.
+  var theme='dark';
+  try{ theme = localStorage.getItem('theme'); }catch(e){}
+  if(!theme){
+    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  }
+  applyTheme(theme);
+
   var saved='en';
   try{ saved = localStorage.getItem('lang') || 'en'; }catch(e){}
   if(saved==='es') setLang('es');
@@ -670,9 +780,20 @@ function setLang(l){
   }, { threshold:.12 });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  // close mobile menu on link click
+  // Mobile menu: keep aria-expanded in sync and close on link click.
+  var burger = document.querySelector('.nav-burger');
+  var navlinks = document.getElementById('navlinks');
+  if(burger){
+    burger.addEventListener('click', function(){
+      var open = navlinks.classList.contains('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+  }
   document.querySelectorAll('#navlinks a').forEach(function(a){
-    a.addEventListener('click', function(){ document.getElementById('navlinks').classList.remove('open'); });
+    a.addEventListener('click', function(){
+      navlinks.classList.remove('open');
+      if(burger) burger.setAttribute('aria-expanded', 'false');
+    });
   });
 })();
 </script>
